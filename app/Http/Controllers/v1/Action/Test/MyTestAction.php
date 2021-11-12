@@ -26,9 +26,10 @@ class MyTestAction extends Controller
      */
     public function run(Request $req): array
     {
-        $id = 1;
+        $name = (string) $req->get('migration_name');
+
         try {
-            $data = $this->service->retrieveSomeData($id);
+            $data = $this->service->retrieveSomeData($name);
         } catch (NotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e->getCode());
         }

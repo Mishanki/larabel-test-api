@@ -24,15 +24,16 @@ class TestRepository implements TestRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param string $migrationName
      * @return null|array
      * @throws SQLException
      */
-    public function retrieveOne(int $id): ?array
+    public function retrieveOne(string $migrationName): ?array
     {
         $stmt = $this->connection->prepare('
-            SELECT * FROM public.phinxlog LIMIT 10
+            SELECT * FROM public.phinxlog WHERE migration_name = :migration_name
         ');
+        $stmt->bindValue(':migration_name', $migrationName, PDO::PARAM_STR);
         if(!$stmt->execute()) {
             throw new SQLException('Some sql error', Errors::SQL_ERROR);
         }
