@@ -4,5 +4,5 @@ namespace App\Repositories\Test;
 
 interface TestRepositoryInterface
 {
-    public function retrieveOne(int $id): array;
+    public function retrieveOne(int $id): ?array;
 }

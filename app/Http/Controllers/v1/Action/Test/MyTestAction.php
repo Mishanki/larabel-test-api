@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Test\TestRepository;
 use App\Services\tests\MyTestService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MyTestAction extends Controller
 {
@@ -16,7 +17,7 @@ class MyTestAction extends Controller
 
     public function __construct()
     {
-        $this->service = new MyTestService(new TestRepository());
+        $this->service = new MyTestService(new TestRepository(DB::connection()->getPdo()));
     }
 
     /**
