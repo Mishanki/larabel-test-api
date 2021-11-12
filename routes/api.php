@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\Action\Test\MyTestAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,8 @@ Route::group(['prefix' => '/v1'], function($app) {
     $app->get('/test', function () {
         return ['a' => 'Hello world!'];
     });
+
+    $app->get('/test-action', [MyTestAction::class, 'run']);
 });
 
 Route::group(['prefix' => '/v2'], function($app) {
