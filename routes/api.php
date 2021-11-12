@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-const V1 = '/v1';
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => '/v1'], function($app) {
+    /* @var $app Route */
+    $app->get('/test', function () {
+        return ['a' => 'Hello world!'];
+    });
+});
 
-Route::get(V1.'/test', function () {
-    return 'Hello world!';
+Route::group(['prefix' => '/v2'], function($app) {
+    /* @var $app Route */
+    $app->get('/test', function () {
+        return ['a' => 'Hello world!!'];
+    });
 });
