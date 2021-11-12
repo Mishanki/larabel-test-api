@@ -7,6 +7,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Repositories\Test\TestRepository;
 use App\Services\tests\MyTestService;
+use Illuminate\Http\Request;
 
 class MyTestAction extends Controller
 {
@@ -19,12 +20,12 @@ class MyTestAction extends Controller
     }
 
     /**
+     * @param Request $req
      * @return array
      */
-    public function run(): array
+    public function run(Request $req): array
     {
         $id = 1;
-
         try {
             $data = $this->service->retrieveSomeData($id);
         } catch (NotFoundException $e) {
