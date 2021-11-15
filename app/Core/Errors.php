@@ -9,4 +9,5 @@ class Errors
     const INTERNAL_ERROR = 1002;
     const SQL_ERROR = 1003;
     const NOT_FOUND_ERROR = 1004;
+    const VALIDATION_ERROR = 1005;
 }
