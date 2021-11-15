@@ -10,4 +10,5 @@ class Errors
     const SQL_ERROR = 1003;
     const NOT_FOUND_ERROR = 1004;
     const VALIDATION_ERROR = 1005;
+    const AUTHORIZATION_ERROR = 1006;
 }

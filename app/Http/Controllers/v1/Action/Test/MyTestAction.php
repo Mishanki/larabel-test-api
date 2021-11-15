@@ -5,7 +5,9 @@ namespace App\Http\Controllers\v1\Action\Test;
 use App\Core\ModelValidationHandler;
 use App\Exceptions\http\NotFoundHttpException;
 use App\Exceptions\NotFoundException;
+use App\Helpers\Validator\AbstractValidator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Test\Dto\TestDto;
 use App\Services\tests\MyTestService;
 use Illuminate\Http\Request;
@@ -40,5 +42,24 @@ class MyTestAction extends Controller
         }
 
         return $data;
+    }
+
+    /**
+     * @param StorePostRequest $req
+     * @return array
+     */
+    public function run_(StorePostRequest $req): array
+    {
+        $req->validated();
+        $migrationName = $req->get('migration_name');
+
+        try {
+            $data = $this->service->retrieveSomeData($migrationName);
+        } catch (NotFoundException $e) {
+            throw new NotFoundHttpException($e->getMessage(), $e->getCode());
+        }
+
+        return $data;
+
     }
 }

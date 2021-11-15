@@ -6,6 +6,7 @@ use App\Core\ApiErrorHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -65,11 +66,6 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             $exception = $this->unauthenticated($request, $exception);
         }
-
-        if ($exception instanceof \Illuminate\Validation\ValidationException) {
-            $exception = $this->convertValidationExceptionToResponse($exception, $request);
-        }
-
 
         return (new ApiErrorHandler())->customApiResponse($exception);
     }

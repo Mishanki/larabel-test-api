@@ -33,7 +33,7 @@ class TestDto extends AbstractValidator
     public function rules(): array
     {
         return [
-            'migration_name' => ['required', 'max:255']
+            'migration_name' => ['required', 'max:2'],
         ];
     }
 
